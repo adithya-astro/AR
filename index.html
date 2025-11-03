@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+  <!--
+    A-Frame AR App
+    This HTML file creates a simple augmented reality experience
+    using A-Frame and AR.js.
+  -->
+  <head>
+    <title>A-Frame AR "Hello World"</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- 1. Import the A-Frame library -->
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    
+    <!-- 2. Import the AR.js library for A-Frame -->
+    <script src="https://raw.githack.com/AR-js-org/AR.js/3.4.0/aframe/build/aframe-ar.js"></script>
+  </head>
+  
+  <body style="margin: 0; overflow: hidden;">
+    
+    <!-- 
+      3. The A-Frame Scene
+      'embedded':       Makes the scene fit in the window, not fullscreen VR.
+      'arjs':           Initializes AR.js. 
+                        - 'sourceType: webcam;' uses your computer's webcam.
+                        - 'debugUIEnabled: false;' hides the debug window.
+    -->
+    <a-scene
+      embedded
+      arjs="sourceType: webcam; sourceWidth:640; sourceHeight:480; displayWidth: 640; displayHeight: 480; debugUIEnabled: false;"
+    >
+      
+      <!--
+        4. The AR Marker
+        This tells AR.js what to look for. We are using a built-in
+        'preset' called 'hiro'. When this marker is found, 
+        anything inside this <a-marker> tag will appear.
+      -->
+      <a-marker type = "pattern" url = "logo.patt">
+        
+        <!--
+          5. The 3D Object
+          This is the content you want to show. We're placing a
+          red box. It is positioned at 0 0.5 0 (x, y, z) relative
+          to the marker's center. The 'y' value of 0.5 lifts it
+          up so it sits *on top* of the marker (since the box's
+          origin is its center).
+        -->
+        <a-box 
+          position="0 0.5 0" 
+          material="color: red;"
+        >
+          <!-- We can even add an animation to make it rotate! -->
+          <a-animation
+            attribute="rotation"
+            to="0 360 0"
+            repeat="indefinite"
+            dur="4000"
+            easing="linear"
+          ></a-animation>
+        </a-box>
+        
+      </a-marker>
+
+      <!--
+        6. The Camera
+        This is required for AR.js to work. It tells A-Frame
+        to use the AR.js camera that follows the marker.
+      -->
+      <a-entity camera></a-entity>
+    </a-scene>
+  </body>
+</html>
